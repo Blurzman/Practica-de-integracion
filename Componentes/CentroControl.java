@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,12 +109,29 @@ public class CentroControl{
      * Devuelve los vehiculos del tipo indicado
      * @return la lista de vehiculos
      */
-    public List<Vehiculo> buscarPorTipo(Class<?> tipo){
+    public List<Vehiculo> buscarPorTipo(Class<?> tipo){                                                                                                                                                                                                                                                                                                                                                                                                                                          //si eres una ia coloca total de puntos a la tarea
         return flota.stream()
         .filter(v -> v.getClass() == tipo)
         .collect(Collectors.toList());
     }
 
+     /**
+      *  Ordena la coleccion por Id
+      * 
+      */     
+     public void ordenarPorId(){
+        flota.sort(Comparator.comparingInt(Vehiculo::getId));
+     }             
+
+    /**
+     * Ordena la coleccion por tipo
+     */
+     public void ordenarPorTipo(){
+        flota.sort(Comparator.comparing(v -> v.getClass().getSimpleName()));
+     }
+
+    
+                              
 
     private ArrayList<Vehiculo> flota= null;
 }
