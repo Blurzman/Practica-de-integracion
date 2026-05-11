@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Gestiona una flota de vehículos.
@@ -26,8 +28,7 @@ public class CentroControl{
      * 
      */
     public void listarVehiculos(){
-        flota.stream()
-        .forEach(System.out::println);
+        flota.forEach(System.out::println);
     }
 
     /**
@@ -73,6 +74,44 @@ public class CentroControl{
         for(Vehiculo v : flota){
             v.patronMovimiento();
         }
+    }
+
+    /**
+     * Devuelve una lista filtrada de los vehiculos conectables
+     * @return vehiculos conectables
+     */
+    public List<Vehiculo> filtrarConectables(){
+        return flota.stream()
+        .filter(v -> v instanceof IConectable)
+        .collect(Collectors.toList());
+    }
+
+    /**
+     * Devuelve una lista de los ids de los vehiculos
+     * @return los ids
+     */
+    public List<String> obtenerIds(){
+        return flota.stream()
+        .map(v -> String.valueOf(v.getId()))
+        .collect(Collectors.toList());
+    }
+
+    /**
+     * Devuelve la cantidad de vehiculos
+     * @return la cantidad de vehiculos
+     */
+    public int contarVehiculos(){
+        return (int) flota.stream().count();
+    }
+
+    /**
+     * Devuelve los vehiculos del tipo indicado
+     * @return la lista de vehiculos
+     */
+    public List<Vehiculo> buscarPorTipo(Class<?> tipo){
+        return flota.stream()
+        .filter(v -> v.getClass() == tipo)
+        .collect(Collectors.toList());
     }
 
 
