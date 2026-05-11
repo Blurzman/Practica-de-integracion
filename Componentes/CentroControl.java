@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -29,7 +30,7 @@ public class CentroControl{
      * 
      */
     public void listarVehiculos(){
-        flota.forEach(System.out::println);
+        flota.forEach(System.out::print);
     }
 
     /**
@@ -130,7 +131,36 @@ public class CentroControl{
         flota.sort(Comparator.comparing(v -> v.getClass().getSimpleName()));
      }
 
-    
+     /**
+      * Imprime un reporte de los vehiculos
+      */
+     public void generarReporte() {
+        System.out.println("=== REPORTE ===");
+        System.out.println("Total: " + contarVehiculos());
+        System.out.println("Conectables: " + filtrarConectables().size());
+        System.out.println("IDs: " + obtenerIds());
+    }
+
+    /**
+     * Imprime las estadisticas
+     */
+    public void estadisticasPorTipo() {
+        flota.stream()
+        .collect(Collectors.groupingBy(v -> v.getClass().getSimpleName(), Collectors.counting()))
+        .forEach((tipo, cantidad) -> System.out.println(tipo + ": " + cantidad));
+    }
+
+    /**
+     * Busca vehiculos que cumplan el criterio dado
+     * @param criterio condicion lambda para filtrar vehiculos
+     * @return lista de vehiculos que cumplen el criterio
+     */
+    public List<Vehiculo> busquedaAvanzada(Predicate<Vehiculo> criterio){
+        return flota.stream()
+        .filter(criterio)
+        .collect(Collectors.toList());
+    }
+
                               
 
     private ArrayList<Vehiculo> flota= null;
