@@ -9,8 +9,16 @@ public class Dron extends Vehiculo implements IConectable{
      * Crea un nuevo Dron con ID autogenerado y altura inicial en 0.
      */
     public Dron(){
-        setId();
+        super();
         altura = 0;
+    }
+
+    public int getAltura(){
+        return altura;
+    }
+
+    public void setAltura(int altura){
+        this.altura = altura;
     }
     
     /**

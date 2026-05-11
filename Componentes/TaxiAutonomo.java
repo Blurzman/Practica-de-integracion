@@ -7,10 +7,17 @@ public class TaxiAutonomo extends Vehiculo implements IConectable{
      * Crea un nuevo TaxiAutonomo con ID autogenerado y distancia inicial en 0.
      */
     public TaxiAutonomo(){
-        setId();
+        super();
         this.distanciaRecorrida = 0;
     }
+    
+    public int getDistanciaRecorrida(){
+        return distanciaRecorrida;
+    }
 
+    public void setDistanciaRecorrida(int distanciaRecorrida){
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
     /**
      * Muestra el patrón de movimiento del taxi indicando la distancia recorrida.
      */
